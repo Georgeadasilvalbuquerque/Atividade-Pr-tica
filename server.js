@@ -50,3 +50,22 @@ app.post("/login", (req,res)=>{
 app.listen(3000, ()=>{
   console.log("Servidor rodando na porta 3000")
 })
+
+
+
+app.get("/produtos", (req, res) => {
+
+  const sql = "SELECT * FROM produtos";
+
+  db.query(sql, (err, result) => {
+
+    if (err) {
+      console.log(err);
+      return res.status(500).json({erro: "erro ao buscar produtos"});
+    }
+
+    res.json(result);
+
+  });
+
+});

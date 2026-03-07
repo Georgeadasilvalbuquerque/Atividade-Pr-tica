@@ -80,3 +80,27 @@ nav a{
 nav a:hover{
     color:#00ff88;
 }
+
+h2 {
+    text-align: center;
+}
+
+/* ÁREA DO CARRINHO */
+.carrinho-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o título e a caixa */
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+/* CAIXA DO CARRINHO */
+.carrinho-box {
+    background: white;
+    padding: 20px;
+    width: 350px; /* Um pouco mais largo que os produtos para ler melhor os itens */
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
