@@ -1,28 +1,15 @@
 const express = require("express")
-const mysql = require("mysql2")
 const cors = require("cors")
-
 const app = express()
-
+const authRoutes = require("./routes/authRoutes")
+app.use(authRoutes)
 app.use(cors())
 app.use(express.json())
 
-// conexão com banco
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "1589",
-  database: "techstore"
+app.listen(3000, ()=>{
+  console.log("Servidor rodando na porta 3000")
 })
 
-// testar conexão
-db.connect((err)=>{
-  if(err){
-    console.log("Erro ao conectar:", err)
-  }else{
-    console.log("Conectado ao MySQL")
-  }
-})
 
 // rota login
 app.post("/login", (req,res)=>{
@@ -47,9 +34,6 @@ app.post("/login", (req,res)=>{
 
 })
 
-app.listen(3000, ()=>{
-  console.log("Servidor rodando na porta 3000")
-})
 
 
 
