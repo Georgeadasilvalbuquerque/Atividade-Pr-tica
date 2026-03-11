@@ -2,7 +2,7 @@ function login(){
 
  const email = document.getElementById("email").value
  const senha = document.getElementById("senha").value
-
+console.log("O que o JS pegou da tela:", email, senha)
  fetch("http://localhost:3000/login",{
    method:"POST",
    headers:{
@@ -19,8 +19,11 @@ function login(){
  .then(data => {
 
    if(data.login){
-     alert("Bem vindo")
+     setTimeout(() => {
+
      window.location.href = "produto.html"
+
+     }, 1500)
    }else{
      alert("Usuário ou senha incorretos")
    }

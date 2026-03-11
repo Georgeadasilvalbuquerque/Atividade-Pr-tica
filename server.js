@@ -1,18 +1,22 @@
 const express = require("express")
 const cors = require("cors")
 const app = express()
-const authRoutes = require("./routes/authRoutes")
-app.use(authRoutes)
+
 app.use(cors())
 app.use(express.json())
 
-app.listen(3000, ()=>{
-  console.log("Servidor rodando na porta 3000")
-})
+const authRoutes = require("./routes/authRoutes")
+app.use(authRoutes)
+
+const db = require("./database/connectio")
+
+
 
 
 // rota login
 app.post("/login", (req,res)=>{
+
+  console.log("Dados recebidos:", req.body);//======================
 
   const {email, senha} = req.body
 
@@ -36,7 +40,6 @@ app.post("/login", (req,res)=>{
 
 
 
-
 app.get("/produtos", (req, res) => {
 
   const sql = "SELECT * FROM produtos";
@@ -53,3 +56,7 @@ app.get("/produtos", (req, res) => {
   });
 
 });
+
+  app.listen(3000, ()=>{
+  console.log("Servidor rodando na porta 3000")
+})

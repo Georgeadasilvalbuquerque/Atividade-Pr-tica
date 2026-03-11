@@ -30,4 +30,31 @@ const login = (req,res)=>{
     })
 }
 
-module.exports = { login }
+// NOVA Função de Cadastro (Usando bcrypt.hash)
+const cadastrar = async (req, res) => {
+    const { email, senha } = req.body;
+
+    try {
+        // 1. Transforma a senha digitada em um Hash seguro
+        const saltRounds = 10;
+        const senhaHash = await bcrypt.hash(senha, saltRounds);
+
+        // 2. Salva o email e a senha criptografada no banco
+        const sql = "INSERT INTO usuarios (email, senha) VALUES (?, ?)";
+
+        db.query(sql, [email, senhaHash], (err, result) => {
+            if (err) {
+                console.log("Erro no banco:", err);
+                return res.json({ sucesso: false, mensagem: "Erro ao salvar no banco." });
+            }
+            res.json({ sucesso: true, mensagem: "Usuário cadastrado com sucesso!" });
+        });
+
+    } catch (erro) {
+        console.log("Erro no bcrypt:", erro);
+        res.json({ sucesso: false, mensagem: "Erro interno no servidor." });
+    }
+}
+
+// Exporte as DUAS funções
+module.exports = { login, cadastrar }
